@@ -15,12 +15,12 @@ struct MovieDbService {
     let imageDbUrl = "http://image.tmdb.org/t/p/w500"
    
     func getLatestMovies(completionHandler: (NSDictionary?, NSError?) -> ()) {
-        let params = ["api_key":"fbbacaf37d0caa882210c20b93b900bf" , "sort_by": "popularity.desc"]
+        let params = ["api_key":apiKey , "sort_by": "popularity.desc"]
         makeCallJson(params, section: "/discover/movie", method: Alamofire.Method.GET, completionHandler: completionHandler)
     }
     
     func getMoviePoster(posterUrl: String, completionHandler: (NSData?, NSError?) -> ()) {
-        let params = ["api_key":"fbbacaf37d0caa882210c20b93b900bf"]
+        let params = ["api_key":apiKey]
         makeCallData(params, section: imageDbUrl + posterUrl, method: Alamofire.Method.GET, completionHandler: completionHandler)
     }
     

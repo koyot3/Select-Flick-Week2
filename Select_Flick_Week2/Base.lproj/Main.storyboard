@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -32,6 +33,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="sectionIndexBackgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="MovieCell" rowHeight="200" id="uyM-6W-6CZ" customClass="MovieCell" customModule="Select_Flick_Week2" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="92" width="600" height="200"/>
@@ -40,13 +42,17 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="199"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dFT-CT-um1">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dFT-CT-um1">
                                             <rect key="frame" x="18" y="16" width="143" height="167"/>
                                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="167" id="aU7-s1-TGf"/>
                                                 <constraint firstAttribute="width" constant="143" id="f8l-lS-1As"/>
                                             </constraints>
+                                        </imageView>
+                                        <imageView userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0jI-MM-TU4">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="199"/>
+                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="2015" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gPl-Hq-3Hd">
                                             <rect key="frame" x="169" y="49" width="42" height="21"/>
@@ -58,16 +64,23 @@
                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Joy" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aCs-RC-4bq">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Joy" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aCs-RC-4bq">
                                             <rect key="frame" x="169" y="16" width="27" height="18"/>
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                                             <color key="textColor" red="0.1194167689" green="0.54969118210000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                    <constraints>
+                                        <constraint firstItem="dFT-CT-um1" firstAttribute="leading" secondItem="OJX-Ya-73k" secondAttribute="leadingMargin" constant="10" id="6bA-13-960"/>
+                                        <constraint firstItem="aCs-RC-4bq" firstAttribute="leading" secondItem="dFT-CT-um1" secondAttribute="trailing" constant="8" id="8gX-XX-aOs"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="aCs-RC-4bq" secondAttribute="trailing" constant="10" id="Ufu-bL-JWa"/>
+                                        <constraint firstItem="dFT-CT-um1" firstAttribute="top" secondItem="OJX-Ya-73k" secondAttribute="topMargin" constant="5" id="fkd-US-GCX"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="backDropImage" destination="0jI-MM-TU4" id="sAp-mI-zYN"/>
                                     <outlet property="nameLabel" destination="aCs-RC-4bq" id="OXX-Xi-0Ax"/>
                                     <outlet property="poster" destination="dFT-CT-um1" id="2TV-zC-0ks"/>
                                     <outlet property="yearLabel" destination="gPl-Hq-3Hd" id="sax-kx-Mf3"/>
@@ -115,7 +128,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d01-ZX-svE">
-                                <rect key="frame" x="14" y="75" width="579" height="190"/>
+                                <rect key="frame" x="11" y="64" width="579" height="536"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

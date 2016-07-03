@@ -13,8 +13,9 @@ class MovieCell: UITableViewCell {
     @IBOutlet weak var yearLabel: UILabel!
     @IBOutlet weak var categoryLabel: UILabel!
     
+    @IBOutlet weak var backDropImage: UIImageView!
     override func prepareForReuse() {
-        
+        backDropImage.image = nil
         poster.image = nil
     }
 }

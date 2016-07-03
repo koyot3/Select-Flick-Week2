@@ -19,6 +19,10 @@ class ViewController: UIViewController {
         self.movieTableView.dataSource = self
         // Do any additional setup after loading the view, typically from a nib.
         loadMovies()
+        // add new search bar
+        var searchBar = UISearchBar()
+        searchBar.sizeToFit()
+        self.navigationItem.titleView = searchBar
     }
     
     func loadMovies(){
@@ -61,6 +65,11 @@ extension ViewController : UITableViewDataSource {
         movieService.getMoviePoster(movie.posterPath){ responseObject, error in
             guard let tempData = responseObject else { print("There's nothing there"); return }
             cell.poster.image = UIImage(data: tempData)
+        }
+        
+        movieService.getMoviePoster(movie.backDrop){ responseObject, error in
+            guard let tempData = responseObject else { print("There's nothing there"); return }
+            cell.backDropImage.image = UIImage(data: tempData)
         }
         
         return cell

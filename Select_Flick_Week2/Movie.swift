@@ -15,6 +15,7 @@ struct Movie {
     var backDropPath:String
     var voteAverage: Float
     var releaseDate: String
+    var backDrop: String
     
     init(rawData: AnyObject) {
         id = rawData.valueForKeyPath("id") as! Int
@@ -24,5 +25,6 @@ struct Movie {
         backDropPath = rawData.valueForKeyPath("backdrop_path") as! String
         voteAverage = rawData.valueForKeyPath("vote_average") as! Float
         releaseDate = rawData.valueForKeyPath("release_date") as! String
+        backDrop = rawData.valueForKeyPath("backdrop_path") as! String
     }
 }
