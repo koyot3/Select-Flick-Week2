@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ZcQ-AS-jyp">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="e0G-7p-tOQ">
+            <objects>
+                <navigationController id="ZcQ-AS-jyp" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="oLE-RK-lDt">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="GFJ-qu-aJU" kind="relationship" relationship="rootViewController" id="7wb-i4-tEa"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BFD-iD-Mc6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-908" y="242"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="zgm-Oh-mgw">
+            <objects>
+                <viewController id="GFJ-qu-aJU" customClass="ViewController" customModule="Select_Flick_Week2" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="200" sectionHeaderHeight="28" sectionFooterHeight="28" id="uME-iY-6EY">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="MovieCell" rowHeight="200" id="uyM-6W-6CZ" customClass="MovieCell" customModule="Select_Flick_Week2" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="92" width="600" height="200"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uyM-6W-6CZ" id="OJX-Ya-73k">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="199"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dFT-CT-um1">
+                                            <rect key="frame" x="18" y="16" width="143" height="167"/>
+                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="167" id="aU7-s1-TGf"/>
+                                                <constraint firstAttribute="width" constant="143" id="f8l-lS-1As"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="2015" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gPl-Hq-3Hd">
+                                            <rect key="frame" x="169" y="49" width="42" height="21"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="42" id="HIN-h3-hxV"/>
+                                                <constraint firstAttribute="height" constant="21" id="QPf-Xf-RcX"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Joy" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aCs-RC-4bq">
+                                            <rect key="frame" x="169" y="16" width="27" height="18"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                            <color key="textColor" red="0.1194167689" green="0.54969118210000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="nameLabel" destination="aCs-RC-4bq" id="OXX-Xi-0Ax"/>
+                                    <outlet property="poster" destination="dFT-CT-um1" id="2TV-zC-0ks"/>
+                                    <outlet property="yearLabel" destination="gPl-Hq-3Hd" id="sax-kx-Mf3"/>
+                                    <segue destination="Ba4-W1-DOC" kind="show" identifier="ShowMovieDetailSegue" id="Kun-mT-mJJ"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="rb9-nu-XS8"/>
+                    <connections>
+                        <outlet property="movieTableView" destination="uME-iY-6EY" id="Dva-SO-KH5"/>
+                        <outlet property="searchDisplayController" destination="sI7-Se-f4n" id="A2D-N3-6a9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eRe-P6-fyF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="1cF-tI-KAy">
+                    <connections>
+                        <outlet property="delegate" destination="GFJ-qu-aJU" id="qdh-7v-7eG"/>
+                        <outlet property="searchContentsController" destination="GFJ-qu-aJU" id="jaH-B6-rwc"/>
+                        <outlet property="searchResultsDataSource" destination="GFJ-qu-aJU" id="vLQ-mQ-jQB"/>
+                        <outlet property="searchResultsDelegate" destination="GFJ-qu-aJU" id="G1U-BJ-jvy"/>
+                    </connections>
+                </searchDisplayController>
+                <searchDisplayController id="sI7-Se-f4n">
+                    <connections>
+                        <outlet property="delegate" destination="GFJ-qu-aJU" id="zX3-hg-BbJ"/>
+                        <outlet property="searchContentsController" destination="GFJ-qu-aJU" id="MU4-0a-4rg"/>
+                        <outlet property="searchResultsDataSource" destination="GFJ-qu-aJU" id="UvY-dI-WMf"/>
+                        <outlet property="searchResultsDelegate" destination="GFJ-qu-aJU" id="af5-vY-qXM"/>
+                    </connections>
+                </searchDisplayController>
+            </objects>
+            <point key="canvasLocation" x="-199" y="235"/>
+        </scene>
+        <!--Movie Detail View Controller-->
+        <scene sceneID="BZ0-a6-op9">
+            <objects>
+                <viewController storyboardIdentifier="MovieDetailViewController" id="Ba4-W1-DOC" customClass="MovieDetailViewController" customModule="Select_Flick_Week2" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="nAG-Jb-JMS"/>
+                        <viewControllerLayoutGuide type="bottom" id="qfW-yo-IBS"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="zFo-IV-c9r">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d01-ZX-svE">
+                                <rect key="frame" x="14" y="75" width="579" height="190"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Py6-96-h1Z"/>
+                    <connections>
+                        <outlet property="poster" destination="GPE-wZ-YYy" id="7K5-cq-wJv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HWe-Gv-DaI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view alpha="0.25" contentMode="scaleToFill" id="0tz-dP-i9p">
+                    <rect key="frame" x="0.0" y="0.0" width="547" height="536"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                </view>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="GPE-wZ-YYy">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
+            </objects>
+            <point key="canvasLocation" x="595" y="173"/>
+        </scene>
+    </scenes>
+</document>
