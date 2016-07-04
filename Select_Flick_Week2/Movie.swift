@@ -27,4 +27,5 @@ struct Movie {
         releaseDate = rawData.valueForKeyPath("release_date") as! String
         backDrop = rawData.valueForKeyPath("backdrop_path") as! String
     }
+    // using getter to retrieve many poster resolution 
 }
