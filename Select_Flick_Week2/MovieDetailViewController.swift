@@ -14,12 +14,24 @@ class MovieDetailViewController: UIViewController {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var releaseDate: UILabel!
     @IBOutlet weak var Overview: UILabel!
+    @IBOutlet weak var backdrop: UIImageView!
     var movie:Movie?
+    let movieService = MovieDbService()
     override func viewWillAppear(animated: Bool) {
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         nameLabel.text = movie!.originalTitle
+        movieService.getMoviePoster(self.movie!.posterPath){ responseObject, error in
+            guard let tempData = responseObject else { print("There's nothing there"); return }
+            self.poster.image = UIImage(data: tempData)
+        }
+        
+        movieService.getMoviePoster(self.movie!.backDrop){ responseObject, error in
+            guard let tempData = responseObject else { print("There's nothing there"); return }
+            self.backdrop.image = UIImage(data: tempData)
+        }
+        self.releaseDate.text = self.movie!.releaseDate[self.movie!.releaseDate.startIndex.advancedBy(0)...self.movie!.releaseDate.startIndex.advancedBy(3)]
     }
 }
