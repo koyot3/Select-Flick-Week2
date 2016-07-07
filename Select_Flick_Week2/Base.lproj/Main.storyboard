@@ -1,30 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ZcQ-AS-jyp">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ZZY-Sh-GZb">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Item-->
-        <scene sceneID="e0G-7p-tOQ">
+        <!--Navigation Controller-->
+        <scene sceneID="vWU-MG-zLA">
             <objects>
-                <navigationController id="ZcQ-AS-jyp" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="Z8a-n9-VIk"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="oLE-RK-lDt">
+                <navigationController storyboardIdentifier="MovieNavigationController" id="ZZY-Sh-GZb" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="fIJ-aE-Wtu">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <textAttributes key="titleTextAttributes">
-                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                        </textAttributes>
                     </navigationBar>
                     <connections>
-                        <segue destination="GFJ-qu-aJU" kind="relationship" relationship="rootViewController" id="7wb-i4-tEa"/>
+                        <segue destination="GFJ-qu-aJU" kind="relationship" relationship="rootViewController" id="XUM-Qh-KOp"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="BFD-iD-Mc6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2lD-dU-j59" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-908" y="242"/>
+            <point key="canvasLocation" x="-1923" y="-17"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="zgm-Oh-mgw">
@@ -124,7 +120,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="-199" y="235"/>
+            <point key="canvasLocation" x="-691" y="-465"/>
         </scene>
         <!--Movie Detail View Controller-->
         <scene sceneID="BZ0-a6-op9">
@@ -211,7 +207,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HWe-Gv-DaI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="595" y="173"/>
+            <point key="canvasLocation" x="603" y="-603"/>
         </scene>
     </scenes>
 </document>

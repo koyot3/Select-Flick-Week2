@@ -23,12 +23,13 @@ class MovieDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         nameLabel.text = movie!.originalTitle
-        movieService.getMoviePoster(self.movie!.posterPath){ responseObject, error in
+        
+        movieService.getMoviePoster(self.movie!.posterPath!){ responseObject, error in
             guard let tempData = responseObject else { print("There's nothing there"); return }
             self.poster.image = UIImage(data: tempData)
         }
         
-        movieService.getMoviePoster(self.movie!.backDrop){ responseObject, error in
+        movieService.getMoviePoster(self.movie!.backDropPath!){ responseObject, error in
             guard let tempData = responseObject else { print("There's nothing there"); return }
             self.backdrop.image = UIImage(data: tempData)
         }

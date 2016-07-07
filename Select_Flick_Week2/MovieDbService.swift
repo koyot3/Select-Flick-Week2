@@ -19,6 +19,16 @@ struct MovieDbService {
         makeCallJson(params, section: "/discover/movie", method: Alamofire.Method.GET, completionHandler: completionHandler)
     }
     
+    func getNowPlayingMovies(completionHandler: (NSDictionary?, NSError?) -> ()) {
+        let params = ["api_key":apiKey]
+        makeCallJson(params, section: "/movie/now_playing", method: Alamofire.Method.GET, completionHandler: completionHandler)
+    }
+    
+    func getTopRatedMovies(completionHandler: (NSDictionary?, NSError?) -> ()) {
+        let params = ["api_key":apiKey]
+        makeCallJson(params, section: "/movie/top_rated", method: Alamofire.Method.GET, completionHandler: completionHandler)
+    }
+    
     func getMoviePoster(posterUrl: String, completionHandler: (NSData?, NSError?) -> ()) {
         let params = ["api_key":apiKey]
         makeCallData(params, section: imageDbUrl + posterUrl, method: Alamofire.Method.GET, completionHandler: completionHandler)

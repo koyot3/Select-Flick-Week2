@@ -12,6 +12,7 @@ class ViewController: UIViewController {
     let movieService = MovieDbService()
     var movies:[Movie] = []
     var pageNumber = 0
+    var displayCategory = "Now playing"
     @IBOutlet var movieTableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +28,8 @@ class ViewController: UIViewController {
     
     func loadMovies(){
         pageNumber = pageNumber + 1
-            movieService.getLatestMovies() { responseObject, error in
+        if displayCategory == "Now playing" {
+            movieService.getNowPlayingMovies() { responseObject, error in
                 guard let tempData = responseObject else { print("There's nothing there"); return }
                 let jsonMovies = tempData.valueForKeyPath("results") as! [NSDictionary]
                 for jsonMovie in jsonMovies{
@@ -36,7 +38,18 @@ class ViewController: UIViewController {
                 }
                 self.movieTableView.reloadData()
             }
-    }
+        } else {
+            movieService.getTopRatedMovies() { responseObject, error in
+                guard let tempData = responseObject else { print("There's nothing there"); return }
+                let jsonMovies = tempData.valueForKeyPath("results") as! [NSDictionary]
+                for jsonMovie in jsonMovies{
+                    let movie = Movie(rawData: jsonMovie)
+                    self.movies.append(movie)
+                }
+                self.movieTableView.reloadData()
+            }
+        }
+                }
     
     
     func resetMovies(){
@@ -62,14 +75,18 @@ extension ViewController : UITableViewDataSource {
         cell.nameLabel.text = movie.originalTitle
         cell.yearLabel.text = movie.releaseDate[movie.releaseDate.startIndex.advancedBy(0)...movie.releaseDate.startIndex.advancedBy(3)]
         
-        movieService.getMoviePoster(movie.posterPath){ responseObject, error in
-            guard let tempData = responseObject else { print("There's nothing there"); return }
-            cell.poster.image = UIImage(data: tempData)
+        if let poster = movie.posterPath {
+            movieService.getMoviePoster(poster){ responseObject, error in
+                guard let tempData = responseObject else { print("There's nothing there"); return }
+                cell.poster.image = UIImage(data: tempData)
+            }
         }
         
-        movieService.getMoviePoster(movie.backDrop){ responseObject, error in
-            guard let tempData = responseObject else { print("There's nothing there"); return }
-            cell.backDropImage.image = UIImage(data: tempData)
+        if let backDrop = movie.backDropPath {
+            movieService.getMoviePoster(backDrop){ responseObject, error in
+                guard let tempData = responseObject else { print("There's nothing there"); return }
+                cell.backDropImage.image = UIImage(data: tempData)
+            }
         }
         
         return cell
@@ -84,5 +101,9 @@ extension ViewController : UITableViewDataSource {
             destination.movie = movies[blogIndex]
         }
     }
+}
+
+extension ViewController : UITabBarDelegate {
+    
 }
 
