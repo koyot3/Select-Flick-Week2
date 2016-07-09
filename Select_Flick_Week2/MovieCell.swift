@@ -7,15 +7,16 @@
 //
 
 import UIKit
+import StarReview
 class MovieCell: UITableViewCell {
     @IBOutlet weak var poster: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var yearLabel: UILabel!
-    @IBOutlet weak var categoryLabel: UILabel!
+    @IBOutlet weak var voteCount: UILabel!
+    @IBOutlet weak var overview: UILabel!
+    @IBOutlet weak var rating: UILabel!
     
-    @IBOutlet weak var backDropImage: UIImageView!
     override func prepareForReuse() {
-        backDropImage.image = nil
         poster.image = nil
     }
 }

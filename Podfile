@@ -8,6 +8,7 @@ pod 'SwiftyJSON'
 pod 'SnapKit'
 pod 'Alamofire'
 pod 'JGProgressHUD'
+pod 'StarReview'
 
   # Pods for Select_Flick_Week2
 

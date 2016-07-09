@@ -15,6 +15,7 @@ struct Movie {
     var backDropPath:String?
     var voteAverage: Float
     var releaseDate: String
+    var voteCount: Float
     
     init(rawData: AnyObject) {
         id = rawData.valueForKeyPath("id") as! Int
@@ -24,6 +25,7 @@ struct Movie {
         backDropPath = rawData.valueForKeyPath("backdrop_path") as? String
         voteAverage = rawData.valueForKeyPath("vote_average") as! Float
         releaseDate = rawData.valueForKeyPath("release_date") as! String
+        voteCount = rawData.valueForKeyPath("vote_count") as! Float
     }
     // using getter to retrieve many poster resolution 
 }

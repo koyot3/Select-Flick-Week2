@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import StarReview
 
 class ViewController: UIViewController {
     let movieService = MovieDbService()
@@ -75,6 +76,11 @@ extension ViewController : UITableViewDataSource {
         cell.nameLabel.text = movie.originalTitle
         cell.yearLabel.text = movie.releaseDate[movie.releaseDate.startIndex.advancedBy(0)...movie.releaseDate.startIndex.advancedBy(3)]
         
+        cell.rating.text = String(movie.voteAverage)
+        cell.voteCount.text = String(movie.voteCount)
+        
+        cell.overview.text = movie.overview
+        
         if let poster = movie.posterPath {
             movieService.getMoviePoster(poster){ responseObject, error in
                 guard let tempData = responseObject else { print("There's nothing there"); return }
@@ -82,12 +88,6 @@ extension ViewController : UITableViewDataSource {
             }
         }
         
-        if let backDrop = movie.backDropPath {
-            movieService.getMoviePoster(backDrop){ responseObject, error in
-                guard let tempData = responseObject else { print("There's nothing there"); return }
-                cell.backDropImage.image = UIImage(data: tempData)
-            }
-        }
         
         return cell
     }
