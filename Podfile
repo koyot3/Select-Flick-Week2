@@ -9,6 +9,7 @@ pod 'SnapKit'
 pod 'Alamofire'
 pod 'JGProgressHUD'
 pod 'StarReview'
+pod 'MGSwipeTableCell'
 
   # Pods for Select_Flick_Week2
 

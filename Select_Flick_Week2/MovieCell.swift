@@ -7,8 +7,8 @@
 //
 
 import UIKit
-import StarReview
-class MovieCell: UITableViewCell {
+import MGSwipeTableCell
+class MovieCell: MGSwipeTableCell {
     @IBOutlet weak var poster: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var yearLabel: UILabel!

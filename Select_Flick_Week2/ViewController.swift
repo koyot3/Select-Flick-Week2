@@ -8,6 +8,7 @@
 
 import UIKit
 import JGProgressHUD
+import MGSwipeTableCell
 
 class ViewController: UIViewController {
     let movieService = MovieDbService()
@@ -187,6 +188,48 @@ extension ViewController : UITableViewDataSource {
             }
         }
         
+        cell.leftButtons = [MGSwipeButton.init(title: "Like", icon: UIImageUtils.resizeImage(UIImage(named:"heart_true")! , newWidth: 40) , backgroundColor: UIColor.whiteColor(), callback: {
+            (sender: MGSwipeTableCell!) -> Bool in
+            return true
+        })]
+        cell.leftSwipeSettings.transition = MGSwipeTransition.Rotate3D
+        
+        //configure right buttons
+        cell.rightButtons = [MGSwipeButton(title: "Share", icon: UIImageUtils.resizeImage(UIImage(named:"facebook")! , newWidth: 40) , backgroundColor: UIColor.blueColor(),  callback: {
+            (sender: MGSwipeTableCell!) -> Bool in
+            let actionSheet = UIAlertController(title: "", message: "Share your Note", preferredStyle: UIAlertControllerStyle.ActionSheet)
+            // Configure a new action for sharing the note in Twitter.
+            let tweetAction = UIAlertAction(title: "Share on Twitter", style: UIAlertActionStyle.Default) { (action) -> Void in
+                
+            }
+            
+            
+            // Configure a new action to share on Facebook.
+            let facebookPostAction = UIAlertAction(title: "Share on Facebook", style: UIAlertActionStyle.Default) { (action) -> Void in
+                
+            }
+            
+            // Configure a new action to show the UIActivityViewController
+            let moreAction = UIAlertAction(title: "More", style: UIAlertActionStyle.Default) { (action) -> Void in
+                
+            }
+            
+            
+            let dismissAction = UIAlertAction(title: "Close", style: UIAlertActionStyle.Cancel) { (action) -> Void in
+                
+            }
+            
+            
+            actionSheet.addAction(tweetAction)
+            actionSheet.addAction(facebookPostAction)
+            actionSheet.addAction(moreAction)
+            actionSheet.addAction(dismissAction)
+            
+            self.presentViewController(actionSheet, animated: true, completion: nil)
+            
+            return true
+        })]
+        cell.rightSwipeSettings.transition = MGSwipeTransition.Rotate3D
         
         return cell
     }
