@@ -21,22 +21,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let nowPlayingViewController = nowPlayingNavigationController.topViewController as! ViewController
         nowPlayingViewController.displayCategory = "Now playing"
         nowPlayingNavigationController.tabBarItem.title = "Now playing"
+        nowPlayingNavigationController.tabBarItem.image = UIImageUtils.resizeImage(UIImage(named: "play")!, newWidth: 20)
         
         let topRatedNavigationController = storyboard.instantiateViewControllerWithIdentifier("MovieNavigationController") as! UINavigationController
         let topRatedViewController = topRatedNavigationController.topViewController as! ViewController
         topRatedViewController.displayCategory = "Top Rated"
         topRatedNavigationController.tabBarItem.title = "Top Rated"
+        topRatedNavigationController.tabBarItem.image = UIImageUtils.resizeImage(UIImage(named: "top-rated")!, newWidth: 20)
         
         let searchNavigationController = storyboard.instantiateViewControllerWithIdentifier("MovieNavigationController") as! UINavigationController
         let searchViewController = searchNavigationController.topViewController as! ViewController
         searchViewController.displayCategory = "Search"
         searchNavigationController.tabBarItem.title = "Search"
+        searchNavigationController.tabBarItem.image = UIImageUtils.resizeImage(UIImage(named: "search")!, newWidth: 20)
         
         let tabBarController = UITabBarController()
         tabBarController.viewControllers = [nowPlayingNavigationController, topRatedNavigationController, searchNavigationController]
-        tabBarController.view.backgroundColor = UIColor.blackColor()
-        
-        
+
+        UITabBar.appearance().translucent = false
+        UITabBar.appearance().barTintColor = UIColor.blackColor()
+        UITabBar.appearance().tintColor = UIColor.yellowColor()
         window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
         
