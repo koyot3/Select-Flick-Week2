@@ -10,6 +10,7 @@ pod 'Alamofire'
 pod 'JGProgressHUD'
 pod 'StarReview'
 pod 'MGSwipeTableCell'
+pod 'Firebase'
 
   # Pods for Select_Flick_Week2
 
