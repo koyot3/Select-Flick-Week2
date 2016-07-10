@@ -1,31 +1,37 @@
-User Stories
-#Search (Pull Request 1)
-[x] User must be able to search, using the /search endpoint.
+# Project 1 - Flicks
 
-There should be a third tab, called search.
+Flicks is a movies app using the [The Movie Database API](http://docs.themoviedb.apiary.io/#).
 
-
-User must be able to filter search results by adult content, release year, and primary release year, which are parameters to /search in the TMDB API. This should be done via a second view controller, called "filters". 
-User should see a "no results found" placeholder in the table view if no results are found.
-Favoriting and Sharing (Pull Request 2)
-User should be able to swipe right on the TableViewCells to expose favorite and share actions. 
-Movies that have been "favorited" should have a visual cue that they've been favorited, such as an icon or change in background color.
-Make sure the "favorited" state persists as you scroll up and down the list of movies.
-Selecting "share" should open a small ActionSheet that looks like this:
+Time spent: 24 hours spent in total
 
 
-Note for this step, the app does not need to remember which movies you've favorited between steps.
-Now, you'll be working on two branches off of Pull Request 2.
+The following **required** functionality is completed:
 
-Persisted Favoriting using Realm (Pull Request 3)
-Closing the app and re-opening the app should "remember" the movies that you've favorited.
-Local persistence: use Realm to remember which movies you've favorited.
-Hint: you'll want to use the id field to correlate the movies together.
-Persisted Favoriting using Firebase (Pull Request 4)
-Sign up for an account using Firebase: https://www.firebase.com/docs/ios/quickstart.html.
-Save your "favorited movies" to Firebase.
-Bonus Tasks.
-Integrate MGSwipeTableCell to implement bi-directional swipe. Swipe left to favorite, and swipe right to share. Swipe left to favorite should trigger automatically upon completion of the swipe.
-Firebase Branch: Implement a "Feed View", where you can see all the favorite actions happening in a TableView.
-Resources
-http://www.appcoda.com/social-framework-introduction/ - Tutorial on how to use Sharing.
+- [x] User can view a list of movies currently playing in theaters. Poster images load asynchronously.
+- [x] User can view movie details by tapping on a cell.
+- [x] User sees loading state while waiting for the API.
+- [x] User sees an error message when there is a network error.
+- [] User can pull to refresh the movie list.
+
+The following **optional** features are implemented:
+
+- [x] Add a tab bar for **Now Playing** and **Top Rated** movies.
+- [] Implement segmented control to switch between list view and grid view.
+- [x] Add a search bar. (Next commit for assignment 3)
+- [x] All images fade in.
+- [x] For the large poster, load the low-res image first, switch to high-res when complete.
+- [x] Customize the highlight and selection effect of the cell.
+- [x] Customize the navigation bar.
+
+
+## Video Walkthrough
+
+Here's a walkthrough of implemented user stories:
+
+<img src='Select_Week_3.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
+GIF created with [LiceCap](http://www.cockos.com/licecap/).
+
+## Notes
+
+
