@@ -7,30 +7,44 @@
 //
 
 import UIKit
-import StarReview
+import JGProgressHUD
 
 class ViewController: UIViewController {
     let movieService = MovieDbService()
     var movies:[Movie] = []
     var pageNumber = 0
     var displayCategory = "Now playing"
+    var segmentControl:UISegmentedControl!
+    var loadingModal:JGProgressHUD!
+    var errorModal:JGProgressHUD!
+    
     @IBOutlet var movieTableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.movieTableView.delegate = self
         self.movieTableView.dataSource = self
         // Do any additional setup after loading the view, typically from a nib.
+        setTheme()
         loadMovies()
-        // add new search bar
-        var searchBar = UISearchBar()
-        searchBar.sizeToFit()
-        self.navigationItem.titleView = searchBar
+    }
+    
+    @IBAction func segmentedControlAction(sender: AnyObject) {
+        if(segmentControl.selectedSegmentIndex == 0)
+        {
+            //textLabel.text = "First Segment Selected";
+        }
+        else if(segmentControl.selectedSegmentIndex == 1)
+        {
+            //textLabel.text = "Second Segment Selected";
+        }
     }
     
     func loadMovies(){
         pageNumber = pageNumber + 1
+        loadingModal.showInView(self.view)
         if displayCategory == "Now playing" {
             movieService.getNowPlayingMovies() { responseObject, error in
+                self.loadingModal.dismissAfterDelay(2, animated: true)
                 guard let tempData = responseObject else { print("There's nothing there"); return }
                 let jsonMovies = tempData.valueForKeyPath("results") as! [NSDictionary]
                 for jsonMovie in jsonMovies{
@@ -38,9 +52,11 @@ class ViewController: UIViewController {
                     self.movies.append(movie)
                 }
                 self.movieTableView.reloadData()
+                
             }
         } else {
             movieService.getTopRatedMovies() { responseObject, error in
+                self.loadingModal.dismissAfterDelay(2, animated: true)
                 guard let tempData = responseObject else { print("There's nothing there"); return }
                 let jsonMovies = tempData.valueForKeyPath("results") as! [NSDictionary]
                 for jsonMovie in jsonMovies{
@@ -55,6 +71,25 @@ class ViewController: UIViewController {
     
     func resetMovies(){
         self.movies = []
+    }
+    
+    func setTheme(){
+        // Segment Control
+        segmentControl = UISegmentedControl()
+        segmentControl.frame.size = CGSize(width: 120, height: 40)
+        segmentControl.insertSegmentWithTitle("List", atIndex: 0, animated: true)
+        segmentControl.insertSegmentWithTitle("Grid", atIndex: 1, animated: true)
+        segmentControl.tintColor = UIColor.yellowColor()
+        segmentControl.addTarget(self, action: #selector(ViewController.segmentedControlAction(_:)), forControlEvents: .ValueChanged)
+        segmentControl.selectedSegmentIndex = 0
+        self.navigationItem.titleView = segmentControl
+        // Loading Modal 
+        loadingModal = JGProgressHUD(style: .Dark)
+        loadingModal.textLabel.text = "Loading..."
+        // Error Modal
+        errorModal = JGProgressHUD(style: .Dark)
+        errorModal.textLabel.text = "No network connection!"
+        errorModal.indicatorView = JGProgressHUDErrorIndicatorView()
     }
 }
 
@@ -82,9 +117,13 @@ extension ViewController : UITableViewDataSource {
         cell.overview.text = movie.overview
         
         if let poster = movie.posterPath {
-            movieService.getMoviePoster(poster){ responseObject, error in
+            movieService.getMoviePoster(poster, highQuality: false){ responseObject, error in
                 guard let tempData = responseObject else { print("There's nothing there"); return }
                 cell.poster.image = UIImage(data: tempData)
+                self.movieService.getMoviePoster(poster, highQuality: true){ responseObject, error in
+                    guard let tempData = responseObject else { print("There's nothing there"); return }
+                    cell.poster.image = UIImage(data: tempData)
+                }
             }
         }
         
@@ -103,7 +142,5 @@ extension ViewController : UITableViewDataSource {
     }
 }
 
-extension ViewController : UITabBarDelegate {
-    
-}
+
 

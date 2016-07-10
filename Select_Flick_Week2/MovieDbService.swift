@@ -13,6 +13,7 @@ struct MovieDbService {
     let apiKey = "fbbacaf37d0caa882210c20b93b900bf"
     let movieDbUrl = "https://api.themoviedb.org/3"
     let imageDbUrl = "http://image.tmdb.org/t/p/w500"
+    let lowImgDbUrl = "https://image.tmdb.org/t/p/w45"
    
     func getLatestMovies(completionHandler: (NSDictionary?, NSError?) -> ()) {
         let params = ["api_key":apiKey , "sort_by": "popularity.desc"]
@@ -29,9 +30,13 @@ struct MovieDbService {
         makeCallJson(params, section: "/movie/top_rated", method: Alamofire.Method.GET, completionHandler: completionHandler)
     }
     
-    func getMoviePoster(posterUrl: String, completionHandler: (NSData?, NSError?) -> ()) {
+    func getMoviePoster(posterUrl: String, highQuality:Bool, completionHandler: (NSData?, NSError?) -> ()) {
         let params = ["api_key":apiKey]
-        makeCallData(params, section: imageDbUrl + posterUrl, method: Alamofire.Method.GET, completionHandler: completionHandler)
+        var url = lowImgDbUrl
+        if highQuality {
+            url = imageDbUrl
+        }
+        makeCallData(params, section: url + posterUrl, method: Alamofire.Method.GET, completionHandler: completionHandler)
     }
     
     func makeCallJson(params: AnyObject , section: String, method: Alamofire.Method, completionHandler: (NSDictionary?, NSError?) -> ()) {

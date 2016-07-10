@@ -24,9 +24,13 @@ class MovieDetailViewController: UIViewController {
         super.viewDidLoad()
         nameLabel.text = movie!.originalTitle
         
-        movieService.getMoviePoster(self.movie!.posterPath!){ responseObject, error in
+        movieService.getMoviePoster(self.movie!.posterPath!, highQuality: false){ responseObject, error in
             guard let tempData = responseObject else { print("There's nothing there"); return }
             self.poster.image = UIImage(data: tempData)
+            self.movieService.getMoviePoster(self.movie!.posterPath!, highQuality: true) { responseObject, error in
+                guard let tempData = responseObject else { print("There's nothing there"); return }
+                self.poster.image = UIImage(data: tempData)
+            }
         }
         
         self.releaseDate.text = self.movie!.releaseDate[self.movie!.releaseDate.startIndex.advancedBy(0)...self.movie!.releaseDate.startIndex.advancedBy(3)]

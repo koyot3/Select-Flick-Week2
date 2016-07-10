@@ -19,4 +19,8 @@ class MovieCell: UITableViewCell {
     override func prepareForReuse() {
         poster.image = nil
     }
+    @IBOutlet weak var likeBtn: UIButton!
+    @IBAction func clickLike(sender: AnyObject) {
+        likeBtn.setBackgroundImage(UIImage(named: "heart_true"), forState: UIControlState.Normal)
+    }
 }
