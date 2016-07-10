@@ -30,6 +30,11 @@ struct MovieDbService {
         makeCallJson(params, section: "/movie/top_rated", method: Alamofire.Method.GET, completionHandler: completionHandler)
     }
     
+    func searchMovies(criteria: SearchCriteriaModel ,completionHandler: (NSDictionary?, NSError?) -> ()) {
+        let params = ["api_key":apiKey, "query": criteria.keyWord, "include_adult": criteria.showAdultConten, "year": criteria.year, "primary_release_year": criteria.primaryReleaseYear]
+        makeCallJson(params, section: "/search/movie", method: Alamofire.Method.GET, completionHandler: completionHandler)
+    }
+    
     func getMoviePoster(posterUrl: String, highQuality:Bool, completionHandler: (NSData?, NSError?) -> ()) {
         let params = ["api_key":apiKey]
         var url = lowImgDbUrl
@@ -39,7 +44,7 @@ struct MovieDbService {
         makeCallData(params, section: url + posterUrl, method: Alamofire.Method.GET, completionHandler: completionHandler)
     }
     
-    func makeCallJson(params: AnyObject , section: String, method: Alamofire.Method, completionHandler: (NSDictionary?, NSError?) -> ()) {
+    private func makeCallJson(params: AnyObject , section: String, method: Alamofire.Method, completionHandler: (NSDictionary?, NSError?) -> ()) {
         Alamofire.request(.GET, movieDbUrl + section, parameters: params as! [String : AnyObject])
             .responseJSON { response in
                 switch response.result {
@@ -50,7 +55,7 @@ struct MovieDbService {
                 }
         }
     }
-    func makeCallData(params: AnyObject , section: String, method: Alamofire.Method, completionHandler: (NSData?, NSError?) -> ()) {
+    private func makeCallData(params: AnyObject , section: String, method: Alamofire.Method, completionHandler: (NSData?, NSError?) -> ()) {
         Alamofire.request(.GET, section, parameters: params as! [String : AnyObject])
             .responseData { response in
                 switch response.result {

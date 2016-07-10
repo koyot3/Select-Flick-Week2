@@ -34,5 +34,7 @@ class MovieDetailViewController: UIViewController {
         }
         
         self.releaseDate.text = self.movie!.releaseDate[self.movie!.releaseDate.startIndex.advancedBy(0)...self.movie!.releaseDate.startIndex.advancedBy(3)]
+        
+        self.navigationController?.title = movie?.originalTitle
     }
 }

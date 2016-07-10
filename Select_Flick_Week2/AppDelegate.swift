@@ -27,8 +27,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         topRatedViewController.displayCategory = "Top Rated"
         topRatedNavigationController.tabBarItem.title = "Top Rated"
         
+        let searchNavigationController = storyboard.instantiateViewControllerWithIdentifier("MovieNavigationController") as! UINavigationController
+        let searchViewController = searchNavigationController.topViewController as! ViewController
+        searchViewController.displayCategory = "Search"
+        searchNavigationController.tabBarItem.title = "Search"
+        
         let tabBarController = UITabBarController()
-        tabBarController.viewControllers = [nowPlayingNavigationController, topRatedNavigationController]
+        tabBarController.viewControllers = [nowPlayingNavigationController, topRatedNavigationController, searchNavigationController]
         tabBarController.view.backgroundColor = UIColor.blackColor()
         
         

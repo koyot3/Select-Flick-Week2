@@ -17,7 +17,9 @@ class ViewController: UIViewController {
     var segmentControl:UISegmentedControl!
     var loadingModal:JGProgressHUD!
     var errorModal:JGProgressHUD!
+    var searchBar: UISearchBar?
     
+    @IBOutlet weak var filterButton: UIBarButtonItem!
     @IBOutlet var movieTableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,9 +28,14 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         setTheme()
         loadMovies()
+        hideKeyboardWhenTappedAround()
     }
     
+    @IBAction func enterSearchFilter(sender: AnyObject) {
+        
+    }
     @IBAction func segmentedControlAction(sender: AnyObject) {
+        // HELP HELP HELP
         if(segmentControl.selectedSegmentIndex == 0)
         {
             //textLabel.text = "First Segment Selected";
@@ -41,8 +48,8 @@ class ViewController: UIViewController {
     
     func loadMovies(){
         pageNumber = pageNumber + 1
-        loadingModal.showInView(self.view)
         if displayCategory == "Now playing" {
+            loadingModal.showInView(self.view)
             movieService.getNowPlayingMovies() { responseObject, error in
                 self.loadingModal.dismissAfterDelay(2, animated: true)
                 guard let tempData = responseObject else { print("There's nothing there"); return }
@@ -54,7 +61,8 @@ class ViewController: UIViewController {
                 self.movieTableView.reloadData()
                 
             }
-        } else {
+        } else if displayCategory == "Top Rated" {
+            loadingModal.showInView(self.view)
             movieService.getTopRatedMovies() { responseObject, error in
                 self.loadingModal.dismissAfterDelay(2, animated: true)
                 guard let tempData = responseObject else { print("There's nothing there"); return }
@@ -66,30 +74,78 @@ class ViewController: UIViewController {
                 self.movieTableView.reloadData()
             }
         }
-                }
+    }
     
     
     func resetMovies(){
         self.movies = []
     }
     
+    var searchCriteria: SearchCriteriaModel!
     func setTheme(){
-        // Segment Control
-        segmentControl = UISegmentedControl()
-        segmentControl.frame.size = CGSize(width: 120, height: 40)
-        segmentControl.insertSegmentWithTitle("List", atIndex: 0, animated: true)
-        segmentControl.insertSegmentWithTitle("Grid", atIndex: 1, animated: true)
-        segmentControl.tintColor = UIColor.yellowColor()
-        segmentControl.addTarget(self, action: #selector(ViewController.segmentedControlAction(_:)), forControlEvents: .ValueChanged)
-        segmentControl.selectedSegmentIndex = 0
-        self.navigationItem.titleView = segmentControl
-        // Loading Modal 
+        // TabBarColoe
+        // Sets the default color of the icon of the selected UITabBarItem and Title
+        UITabBar.appearance().tintColor = UIColor.yellowColor()
+        
+        // Sets the default color of the background of the UITabBar
+        UITabBar.appearance().barTintColor = UIColor.blackColor()
+        
+        // Loading Modal
         loadingModal = JGProgressHUD(style: .Dark)
         loadingModal.textLabel.text = "Loading..."
         // Error Modal
         errorModal = JGProgressHUD(style: .Dark)
         errorModal.textLabel.text = "No network connection!"
         errorModal.indicatorView = JGProgressHUDErrorIndicatorView()
+        
+        // Search Page
+        if displayCategory == "Search" {
+            // Init Criteria Model
+            searchCriteria = SearchCriteriaModel()
+            // Search Bar
+            searchBar = UISearchBar()
+            searchBar?.sizeToFit()
+            searchBar?.delegate = self
+            self.navigationItem.titleView = searchBar
+            // Filter Button
+        } else {
+            // Remove Filter
+            self.navigationItem.rightBarButtonItems?.removeFirst()
+            
+            // Now Playing & Top Rated Page
+            // Segment Control
+            segmentControl = UISegmentedControl()
+            segmentControl.frame.size = CGSize(width: 120, height: 40)
+            segmentControl.insertSegmentWithTitle("List", atIndex: 0, animated: true)
+            segmentControl.insertSegmentWithTitle("Grid", atIndex: 1, animated: true)
+            segmentControl.tintColor = UIColor.yellowColor()
+            segmentControl.addTarget(self, action: #selector(ViewController.segmentedControlAction(_:)), forControlEvents: .ValueChanged)
+            segmentControl.selectedSegmentIndex = 0
+            self.navigationItem.titleView = segmentControl
+        }
+    }
+}
+
+extension ViewController : UISearchBarDelegate {
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        self.searchCriteria.keyWord = searchText
+        searchMovies()
+    }
+    
+    func searchMovies() {
+        if self.searchCriteria.keyWord != "" {
+            movieService.searchMovies(self.searchCriteria) { responseObject, error in
+                self.loadingModal.dismissAfterDelay(2, animated: true)
+                guard let tempData = responseObject else { print("There's nothing there"); return }
+                let jsonMovies = tempData.valueForKeyPath("results") as! [NSDictionary]
+                self.resetMovies()
+                for jsonMovie in jsonMovies{
+                    let movie = Movie(rawData: jsonMovie)
+                    self.movies.append(movie)
+                }
+                self.movieTableView.reloadData()
+            }
+        }
     }
 }
 
@@ -98,6 +154,8 @@ extension ViewController : UITableViewDelegate {
 }
 
 extension ViewController : UITableViewDataSource {
+    
+    
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
@@ -109,7 +167,9 @@ extension ViewController : UITableViewDataSource {
         let movie = movies[indexPath.row]
         let cell = tableView.dequeueReusableCellWithIdentifier("MovieCell", forIndexPath: indexPath) as! MovieCell
         cell.nameLabel.text = movie.originalTitle
-        cell.yearLabel.text = movie.releaseDate[movie.releaseDate.startIndex.advancedBy(0)...movie.releaseDate.startIndex.advancedBy(3)]
+        if movie.releaseDate != "" {
+            cell.yearLabel.text = movie.releaseDate[movie.releaseDate.startIndex.advancedBy(0)...movie.releaseDate.startIndex.advancedBy(3)]
+        }
         
         cell.rating.text = String(movie.voteAverage)
         cell.voteCount.text = String(movie.voteCount)
@@ -138,9 +198,33 @@ extension ViewController : UITableViewDataSource {
             blogIndex = movieTableView.indexPathForSelectedRow?.row
         {
             destination.movie = movies[blogIndex]
+        } else if segue.identifier == "FilterSegue",
+            let destination = segue.destinationViewController as? FilterViewController {
+            destination.delegate = self
+            if destination.criteria == nil {
+                destination.criteria = self.searchCriteria
+            }
+            
         }
     }
 }
 
 
+extension ViewController : FiltersDelegate {
+    func didChangedCriteria(filterController: FilterViewController, criteria: SearchCriteriaModel) {
+        // update
+        searchMovies()
+    }
+}
+
+extension ViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: "dismissKeyboard")
+        view.addGestureRecognizer(tap)
+    }
+    
+    func dismissKeyboard() {
+        view.endEditing(true)
+    }
+}
 

@@ -11,10 +11,13 @@
             <objects>
                 <navigationController storyboardIdentifier="MovieNavigationController" id="ZZY-Sh-GZb" sceneMemberID="viewController">
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" backIndicatorImage="background-cell" id="fIJ-aE-Wtu">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="fIJ-aE-Wtu">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="1" green="0.70662396329999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        </textAttributes>
                     </navigationBar>
                     <connections>
                         <segue destination="GFJ-qu-aJU" kind="relationship" relationship="rootViewController" id="XUM-Qh-KOp"/>
@@ -162,8 +165,17 @@
                             </tableViewCell>
                         </prototypes>
                     </tableView>
-                    <navigationItem key="navigationItem" id="rb9-nu-XS8"/>
+                    <navigationItem key="navigationItem" id="rb9-nu-XS8">
+                        <barButtonItem key="rightBarButtonItem" title="Filter" style="plain" id="A6a-dj-hcO" userLabel="Filter">
+                            <color key="tintColor" red="1" green="0.89576937099999998" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="enterSearchFilter:" destination="GFJ-qu-aJU" id="Ucm-6F-j6a"/>
+                                <segue destination="3a7-iw-kJz" kind="show" identifier="FilterSegue" id="YfU-A0-I1c"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="filterButton" destination="A6a-dj-hcO" id="HBx-hV-ACY"/>
                         <outlet property="movieTableView" destination="uME-iY-6EY" id="Dva-SO-KH5"/>
                         <outlet property="searchDisplayController" destination="sI7-Se-f4n" id="A2D-N3-6a9"/>
                     </connections>
@@ -295,11 +307,115 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HWe-Gv-DaI" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <swipeGestureRecognizer direction="right" id="GON-E7-mo5"/>
             </objects>
-            <point key="canvasLocation" x="603" y="-603"/>
+            <point key="canvasLocation" x="108" y="-345"/>
+        </scene>
+        <!--Filter-->
+        <scene sceneID="0mz-Gp-JeL">
+            <objects>
+                <tableViewController storyboardIdentifier="FilterViewController" title="Filter" useStoryboardIdentifierAsRestorationIdentifier="YES" id="3a7-iw-kJz" customClass="FilterViewController" customModule="Select_Flick_Week2" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="ueR-gt-1YX">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                        <color key="tintColor" red="1" green="0.70662396329999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="sectionIndexColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="sectionIndexBackgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                        <sections>
+                            <tableViewSection headerTitle="Content control" id="T5R-6L-vay">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="qxf-GF-1cg">
+                                        <rect key="frame" x="0.0" y="92" width="414" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qxf-GF-1cg" id="ocV-UO-FpZ">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Show adult content" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h6B-ot-dPZ">
+                                                    <rect key="frame" x="20" y="11" width="158" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dXz-Nn-tlw">
+                                                    <rect key="frame" x="349" y="6" width="51" height="31"/>
+                                                    <color key="onTintColor" red="1" green="0.70662396329999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="thumbTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <connections>
+                                                        <action selector="changeAdultSetting:" destination="3a7-iw-kJz" eventType="valueChanged" id="7MG-x8-QYy"/>
+                                                    </connections>
+                                                </switch>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                                        <color key="tintColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Year filter" id="VLp-rv-RF2">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="55" id="fog-bF-zn0" userLabel="Release">
+                                        <rect key="frame" x="0.0" y="164" width="414" height="55"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fog-bF-zn0" id="aWw-St-oFC">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="54"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Release year" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="evU-UE-3um">
+                                                    <rect key="frame" x="23" y="8" width="141" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <pickerView contentMode="scaleToFill" semanticContentAttribute="playback" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5dZ-WN-Fb4">
+                                                    <rect key="frame" x="184" y="0.0" width="222" height="54"/>
+                                                </pickerView>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="60" id="GJ9-hI-IbQ" userLabel="Primary">
+                                        <rect key="frame" x="0.0" y="219" width="414" height="60"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GJ9-hI-IbQ" id="BLV-Gg-XFJ">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="59"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Primary release year" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PlC-w5-OJx">
+                                                    <rect key="frame" x="21" y="19" width="175" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <pickerView contentMode="scaleToFill" semanticContentAttribute="playback" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zv0-oU-giM">
+                                                    <rect key="frame" x="191" y="8" width="215" height="43"/>
+                                                    <color key="tintColor" red="1" green="0.70662396329999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                </pickerView>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="3a7-iw-kJz" id="oUV-nN-3PR"/>
+                            <outlet property="delegate" destination="3a7-iw-kJz" id="5cF-xh-y8N"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Filter" id="uZR-b7-owt"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                    <connections>
+                        <outlet property="primaryReleaseYearPicker" destination="zv0-oU-giM" id="w59-MC-YDE"/>
+                        <outlet property="releaseYearPick" destination="5dZ-WN-Fb4" id="HKZ-6t-5WA"/>
+                        <outlet property="showAdultChecker" destination="dXz-Nn-tlw" id="M0k-It-mQs"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GOB-WI-WNB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-328" y="-879"/>
         </scene>
     </scenes>
     <resources>
-        <image name="background-cell" width="3840" height="2400"/>
         <image name="heart_false" width="240" height="240"/>
         <image name="imdb" width="48" height="48"/>
         <image name="vote_count_white" width="240" height="240"/>
