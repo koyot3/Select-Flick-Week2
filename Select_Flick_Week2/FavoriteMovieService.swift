@@ -17,6 +17,9 @@ class FavoriteMovieService {
         let favoriteMovies = realm.objects(FavoriteMovieDTO.self).filter(predicate)
         if favoriteMovies.count == 0 {
             // add new
+            var userFavMovies = FavoriteMovieDTO()
+            userFavMovies.username = username
+            
         } else {
             var favoriteMovies = favoriteMovies.first?.favouriteMovies
             // update
