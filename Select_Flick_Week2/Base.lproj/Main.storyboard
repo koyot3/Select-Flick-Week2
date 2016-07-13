@@ -233,7 +233,43 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bpF-2a-uiU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-842" y="378"/>
+            <point key="canvasLocation" x="-1178" y="466"/>
+        </scene>
+        <!--Share View Controller-->
+        <scene sceneID="Q9H-NZ-ooO">
+            <objects>
+                <viewController storyboardIdentifier="ShareViewController" id="LlO-Z8-OsP" customClass="ShareViewController" customModule="Select_Flick_Week2" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="i4K-Ct-qQC"/>
+                        <viewControllerLayoutGuide type="bottom" id="6dL-5H-U6I"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8rE-C6-RG2">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="N33-YS-Weg">
+                                <rect key="frame" x="10" y="30" width="394" height="696"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="alert" returnKeyType="done" enablesReturnKeyAutomatically="YES"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="6dL-5H-U6I" firstAttribute="top" secondItem="N33-YS-Weg" secondAttribute="bottom" constant="10" id="3nH-lQ-2jo"/>
+                            <constraint firstItem="N33-YS-Weg" firstAttribute="leading" secondItem="8rE-C6-RG2" secondAttribute="leading" constant="10" id="3ve-po-SiL"/>
+                            <constraint firstAttribute="trailing" secondItem="N33-YS-Weg" secondAttribute="trailing" constant="10" id="apP-C2-6DX"/>
+                            <constraint firstItem="N33-YS-Weg" firstAttribute="top" secondItem="i4K-Ct-qQC" secondAttribute="bottom" constant="10" id="qIW-MA-o7k"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                    <connections>
+                        <outlet property="statusField" destination="N33-YS-Weg" id="6CE-O7-90C"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ymb-zF-kL3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-580" y="392"/>
         </scene>
         <!--Movie Detail View Controller-->
         <scene sceneID="BZ0-a6-op9">
