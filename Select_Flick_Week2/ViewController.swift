@@ -197,7 +197,9 @@ extension ViewController : UITableViewDataSource {
         //configure right buttons
         cell.rightButtons = [MGSwipeButton(title: "Share", icon: UIImageUtils.resizeImage(UIImage(named:"share-white")! , newWidth: 40) , backgroundColor: UIColor.blueColor(),  callback: {
             (sender: MGSwipeTableCell!) -> Bool in
-            
+            let sharingController = self.storyboard?.instantiateViewControllerWithIdentifier("ShareViewController") as! ShareViewController
+            self.navigationController?.pushViewController(sharingController, animated: true)
+            //let sharingController =
             /*
             let actionSheet = UIAlertController(title: "", message: "Share your Note", preferredStyle: UIAlertControllerStyle.ActionSheet)
             // Configure a new action for sharing the note in Twitter.
