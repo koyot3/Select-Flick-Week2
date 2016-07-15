@@ -25,6 +25,7 @@ class MovieCell: MGSwipeTableCell {
     
     override func prepareForReuse() {
         poster.image = nil
+        likeBtn.setBackgroundImage(nil, forState:  .Normal)
     }
     @IBOutlet weak var likeBtn: UIButton!
     @IBAction func clickLike(sender: AnyObject) {

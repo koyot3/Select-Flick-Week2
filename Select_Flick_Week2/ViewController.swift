@@ -291,7 +291,6 @@ extension ViewController {
 
 // Click Like
 extension ViewController : LikeMovieCellDelegate {
-    
     func clickLikeButton(cellController: MGSwipeTableCell, movie: Movie, isLike: Bool) {
         FavoriteMovieService.clickFavoriteButton(self.username, movieId: movie.id)
     }

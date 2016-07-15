@@ -36,9 +36,10 @@ class FavoriteMovieService {
             movie.isLike = true
             movie.transactionDate = NSDate()
             userFavMovies.favouriteMovies.append(movie)
-            try! realm.write() {
+            //try! realm.commitWrite() {
                 realm.create(UserFavoriteMoviesDTO.self, value: userFavMovies)
-            }
+            //}
+            try! realm.commitWrite()
             
         } else {
             var isFound:Bool = false
@@ -57,9 +58,11 @@ class FavoriteMovieService {
                 movie.transactionDate = NSDate()
                 favoriteMovies.first?.favouriteMovies.append(movie)
             }
-            try! realm.write() {
-                realm.create(UserFavoriteMoviesDTO.self, value: (favoriteMovies.first?.favouriteMovies)!, update: true)
-            }
+            //try! realm.write() {
+            var test = favoriteMovies.first?.favouriteMovies
+                realm.create(UserFavoriteMoviesDTO.self, value: (favoriteMovies.first)!, update: true)
+            //}
+            try! realm.commitWrite()
         }
     }
 }
