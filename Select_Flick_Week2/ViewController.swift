@@ -19,6 +19,9 @@ class ViewController: UIViewController {
     var loadingModal:JGProgressHUD!
     var errorModal:JGProgressHUD!
     var searchBar: UISearchBar?
+    // Realm
+    var userFavoriteMovie:UserFavoriteMoviesDTO!
+    var username:String = "koyot3"
     
     @IBOutlet weak var filterButton: UIBarButtonItem!
     @IBOutlet var movieTableView: UITableView!
@@ -27,9 +30,11 @@ class ViewController: UIViewController {
         self.movieTableView.delegate = self
         self.movieTableView.dataSource = self
         // Do any additional setup after loading the view, typically from a nib.
+        loadFavoriteMovies()
         setTheme()
         loadMovies()
         hideKeyboardWhenTappedAround()
+        
     }
     
     @IBAction func enterSearchFilter(sender: AnyObject) {
@@ -230,7 +235,14 @@ extension ViewController : UITableViewDataSource {
             return true
         })]
         cell.rightSwipeSettings.transition = MGSwipeTransition.Rotate3D
-        
+        // favorite 
+        for movieDTO in self.userFavoriteMovie.favouriteMovies {
+            if movieDTO.movieId == movie.id && movieDTO.isLike {
+                cell.clickLike(self)
+            }
+        }
+        cell.delegateClick = self
+        cell.movie = movie
         return cell
     }
     
@@ -268,6 +280,19 @@ extension ViewController {
     
     func dismissKeyboard() {
         view.endEditing(true)
+    }
+}
+// Enhancement for Realm 
+extension ViewController {
+    func loadFavoriteMovies() {
+        userFavoriteMovie = FavoriteMovieService.getFavoriteMovies(self.username)
+    }
+}
+
+// Click Like
+extension ViewController : LikeMovieCellDelegate {
+    func clickLikeButton(cellController: MGSwipeTableCell, movie: Movie, isLike: Bool) {
+        FavoriteMovieService.clickFavoriteButton(self.username, movieId: movie.id)
     }
 }
 

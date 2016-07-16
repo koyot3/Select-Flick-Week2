@@ -1,5 +1,5 @@
 //
-//  FavoriteMovie.swift
+//  FavoriteMovieDTO.swift
 //  Select_Flick_Week2
 //
 //  Created by admin on 7/11/16.
@@ -9,11 +9,10 @@
 import Foundation
 import RealmSwift
 
-class FavoriteMovieDTO: Object {
-    dynamic var movieId:Int = 0
-    dynamic var isLike:Bool = true
-    dynamic var transactionDate:NSDate!
+class UserFavoriteMoviesDTO : Object {
+    dynamic var username:String!
+    let favouriteMovies = List<FavoriteMovieDTO>()
     override static func primaryKey() -> String? {
-        return "movieId"
+        return "username"
     }
 }

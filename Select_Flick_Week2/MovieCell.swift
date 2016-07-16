@@ -8,6 +8,10 @@
 
 import UIKit
 import MGSwipeTableCell
+protocol LikeMovieCellDelegate {
+    func clickLikeButton(cellController: MGSwipeTableCell, movie: Movie, isLike:Bool)
+
+}
 class MovieCell: MGSwipeTableCell {
     @IBOutlet weak var poster: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
@@ -15,12 +19,22 @@ class MovieCell: MGSwipeTableCell {
     @IBOutlet weak var voteCount: UILabel!
     @IBOutlet weak var overview: UILabel!
     @IBOutlet weak var rating: UILabel!
+    var isLike:Bool = false
+    var movie:Movie!
+    var delegateClick: LikeMovieCellDelegate!
     
     override func prepareForReuse() {
         poster.image = nil
+        likeBtn.setBackgroundImage(nil, forState:  .Normal)
     }
     @IBOutlet weak var likeBtn: UIButton!
     @IBAction func clickLike(sender: AnyObject) {
-        likeBtn.setBackgroundImage(UIImage(named: "heart_true"), forState: UIControlState.Normal)
+        if isLike == false {
+            likeBtn.setBackgroundImage(UIImage(named: "heart_true"), forState: UIControlState.Normal)
+        } else {
+            likeBtn.setImage(nil, forState: UIControlState.Normal)
+        }
+        isLike = !isLike
+        delegateClick?.clickLikeButton(self, movie: self.movie, isLike: isLike)
     }
 }
